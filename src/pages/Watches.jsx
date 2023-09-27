@@ -46,7 +46,7 @@ const Watches = () => {
     initApp();
   }, []);
   return (
-    <div className="h-[22rem] overflow-y-outo relative">
+    <div className="h-screen overflow-y-outo relative">
       {isLoading && (
         <div className="h-screen flex items-center justify-center">
           <img src="/loader_gif.gif" alt="Loading......." />

@@ -9,7 +9,7 @@ const Navbar = () => {
         <div className="p-4 flex justify-between text-white items-center h-full">
           <div className="text-white text-2xl flex justify-center items-center font-extrabold">
             <img src="/logo.png" alt="" className="h-20" />{" "}
-            <span className="animate-bounce">Movie Land</span>
+            <span className="animate-bounce">Movie Libirary</span>
           </div>
           <div className="flex gap-4">
             <Link to="/" className=" hover:text-red-800">
