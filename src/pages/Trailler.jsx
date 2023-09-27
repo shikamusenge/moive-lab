@@ -1,13 +1,18 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
+import { FaRegFaceAngry } from "react-icons/fa6";
 import YouTube from "react-youtube";
 const Trailler = () => {
   const { id } = useParams();
+  const [isLoading, setIsLoading] = useState(false);
+  const [data, setData] = useState(false);
   const [defaultVideo, setkey] = useState({ key: "" });
   console.log(defaultVideo);
   const [traillors, setTraillors] = useState([]);
   useEffect(() => {
+    setData(true);
+    setIsLoading(true);
     const options = {
       headers: {
         accept: "application/json",
@@ -25,7 +30,8 @@ const Trailler = () => {
           `https://api.themoviedb.org/3/movie/${id}/videos?language=en-US`
         );
         setTraillors(recentVideos.data.results);
-        console.log(traillors[0]);
+        traillors.length == 0 || (traillors == null && setData(false));
+        setIsLoading(false);
       } catch (error) {
         console.log(error);
       }
@@ -36,6 +42,16 @@ const Trailler = () => {
     <>
       <div className="flex">
         <div className="flex w-[20rem] flex-col gap-4 h-screen shadow-2xl shadow-blue-950 mx-4">
+          {isLoading && (
+            <div className="h-full flex flex-col items-center justify-center">
+              <img src="/loader_gif.gif" alt="" />
+            </div>
+          )}
+          {!data == 0 && (
+            <div className="h-full flex flex-col items-center justify-center animate-pulse text-2xl">
+              {<FaRegFaceAngry />} Sorry!
+            </div>
+          )}
           {traillors.map((traillor, index) => (
             <Link
               to={`/watch/${traillor.key}/${id}`}
@@ -46,7 +62,6 @@ const Trailler = () => {
             </Link>
           ))}
         </div>
-        {/* <div>{<YouTube videoId={traillors[0].key || "vsBwcxu8bAQ"} />}</div> */}
       </div>
     </>
   );

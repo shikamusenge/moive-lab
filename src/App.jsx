@@ -5,6 +5,7 @@ import Home from "./pages/Home";
 import Watches from "./pages/Watches";
 import Trailler from "./pages/Trailler";
 import WatchTrairor from "./pages/WatchTrairor";
+import SearchMovi from "./pages/SearchMovi";
 const App = () => {
   return (
     <>
@@ -14,6 +15,7 @@ const App = () => {
         <Route path="/watches" element={<Watches />} />
         <Route path="/trailor/:id" element={<Trailler />} />
         <Route path="/watch/:id/:mid" element={<WatchTrairor />} />
+        <Route path="/search/:query" element={<SearchMovi />} />
         <Route path="/*" element={<div>Page not found</div>} />
       </Routes>
     </>

@@ -4,7 +4,7 @@ const Navbar = () => {
   const [query, setQuery] = useState();
   const navigate = useNavigate();
   return (
-    <div>
+    <div className="top-0 sticky z-20">
       <nav className=" px-12  items-center grid bg-blue-950 h-[100px] overflow-hidden">
         <div className="p-4 flex justify-between text-white items-center h-full">
           <div className="text-white text-2xl flex justify-center items-center font-extrabold">
@@ -33,7 +33,10 @@ const Navbar = () => {
             />
             <button
               className="px-12 m-2 bg-red-700 rounded-lg py-2"
-              type="submit"
+              onClick={(e) => {
+                e.preventDefault();
+                navigate(`/search/${query}`);
+              }}
             >
               Search
             </button>
