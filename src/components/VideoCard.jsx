@@ -2,7 +2,7 @@ import React from "react";
 
 function VideoCard({ image = "/.iop.jpg", name }) {
   return (
-    <div className="relative bg-blue-600 w-fit transition-all hover:opacity-[0.8] rounded-sm">
+    <div className="relative bg-blue-600 mb-3 w-fit transition-all hover:opacity-[0.8] rounded-sm">
       <div>
         <img
           src={`https://www.themoviedb.org/t/p/w600_and_h900_bestv2${image}`}

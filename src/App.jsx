@@ -8,7 +8,8 @@ import WatchTrairor from "./pages/WatchTrairor";
 import SearchMovi from "./pages/SearchMovi";
 import Footer from "./components/Footer";
 import PageNotFound from "./pages/PageNotFound";
-
+import ExericePage from "./Exericse/ExericePage";
+import Bird from "./Exericse/Bird";
 const App = () => {
   return (
     <>
@@ -19,9 +20,11 @@ const App = () => {
         <Route path="/trailor/:id" element={<Trailler />} />
         <Route path="/watch/:id/:mid" element={<WatchTrairor />} />
         <Route path="/search/:query" element={<SearchMovi />} />
+        <Route path="/exercises/:Sname/:Sage" element={<ExericePage />} />
+        <Route path="/exercises/dogs" element={<Bird />} />
         <Route path="/*" element={<PageNotFound />} />
       </Routes>
-      <Footer></Footer>
+      {/* <Footer></Footer> */}
     </>
   );
 };
