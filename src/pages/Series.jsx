@@ -3,9 +3,8 @@ import VideoCard from "../components/VideoCard";
 import { Link } from "react-router-dom";
 import { FaUserAlt, FaCheck } from "react-icons/fa";
 import axios from "axios";
-const Watches = () => {
+const Series = () => {
   const [recent, setRecent] = useState([]);
-  const [order, setOrderBy] = useState("now_playing");
   const [isLoading, setIsLoading] = useState(true);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
@@ -25,18 +24,14 @@ const Watches = () => {
     };
     const getData = async () => {
       try {
-        const recentVideos = await fetchData(
-          "https://api.themoviedb.org/3/movie/now_playing"
-        );
-        setRecent(recentVideos.data.results);
-        const popularVideos = await fetchData(
-          `https://api.themoviedb.org/3/movie/${order}?include_adult=${adult}&include_video=true&images=true&language=en-US&page=${page}`
-        );
+        const url =
+          "https://api.themoviedb.org/3/discover/tv?include_adult=false&include_null_first_air_dates=false&language=en-US&page=1&sort_by=popularity.desc";
+        const popularVideos = await fetchData(url);
         setSelected(popularVideos.data.results);
         setTotalPages(popularVideos.data.total_pages);
         setIsLoading(false);
       } catch (error) {
-        console.log(error);
+        setIsLoading(false);
       }
     };
     getData();
@@ -68,26 +63,7 @@ const Watches = () => {
           </div>
         </div>
       </div>
-      <div>
-        #Recent videos
-        <div className="grid grid-cols-2 md:grid-cols-7 overflow-x-auto py-2 px-4">
-          {recent.map(
-            (video, index) =>
-              index < 7 && (
-                <Link
-                  to={`/trailor/${video.id}`}
-                  key={video.id}
-                  className="w-full min-w-fi justify-end flex"
-                >
-                  <VideoCard
-                    name={video.original_title}
-                    image={video.backdrop_path}
-                  />
-                </Link>
-              )
-          )}
-        </div>
-      </div>
+      <div></div>
       <div>
         <nav className=" bordered m-3 p-2 flex overflow-x-auto gap-3 bordered text-2xl h-fit bg-blue-200">
           {Array.from(Array(totalPages), (e, i) => {
@@ -123,4 +99,4 @@ const Watches = () => {
   );
 };
 
-export default Watches;
+export default Series;

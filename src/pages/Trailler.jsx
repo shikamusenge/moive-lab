@@ -6,7 +6,7 @@ import YouTube from "react-youtube";
 const Trailler = () => {
   const { id } = useParams();
   const [isLoading, setIsLoading] = useState(false);
-  const [data, setData] = useState(false);
+  const [data, setData] = useState(true);
   const [defaultVideo, setkey] = useState({ key: "" });
   console.log(defaultVideo);
   const [traillors, setTraillors] = useState([]);
@@ -33,6 +33,8 @@ const Trailler = () => {
         traillors.length == 0 || (traillors == null && setData(false));
         setIsLoading(false);
       } catch (error) {
+        setIsLoading(false);
+        setData(false);
         console.log(error);
       }
     };
@@ -47,7 +49,7 @@ const Trailler = () => {
               <img src="/loader_gif.gif" alt="" />
             </div>
           )}
-          {!data == 0 && (
+          {!data && !isLoading && (
             <div className="h-full flex flex-col items-center justify-center animate-pulse text-2xl">
               {<FaRegFaceAngry />} Sorry!
             </div>

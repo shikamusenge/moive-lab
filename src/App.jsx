@@ -10,6 +10,7 @@ import Footer from "./components/Footer";
 import PageNotFound from "./pages/PageNotFound";
 import ExericePage from "./Exericse/ExericePage";
 import Bird from "./Exericse/Bird";
+import Series from "./pages/Series";
 const App = () => {
   return (
     <>
@@ -17,6 +18,7 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/watches" element={<Watches />} />
+        <Route path="/series" element={<Series />} />
         <Route path="/trailor/:id" element={<Trailler />} />
         <Route path="/watch/:id/:mid" element={<WatchTrairor />} />
         <Route path="/search/:query" element={<SearForchMovie />} />
