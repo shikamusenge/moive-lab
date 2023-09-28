@@ -5,10 +5,11 @@ import Home from "./pages/Home";
 import Watches from "./pages/Watches";
 import Trailler from "./pages/Trailler";
 import WatchTrairor from "./pages/WatchTrairor";
-import SearchMovi from "./pages/SearchMovi";
+import SearForchMovie from "./pages/SearchMovie";
 import Footer from "./components/Footer";
 import PageNotFound from "./pages/PageNotFound";
-
+import ExericePage from "./Exericse/ExericePage";
+import Bird from "./Exericse/Bird";
 const App = () => {
   return (
     <>
@@ -18,10 +19,12 @@ const App = () => {
         <Route path="/watches" element={<Watches />} />
         <Route path="/trailor/:id" element={<Trailler />} />
         <Route path="/watch/:id/:mid" element={<WatchTrairor />} />
-        <Route path="/search/:query" element={<SearchMovi />} />
+        <Route path="/search/:query" element={<SearForchMovie />} />
+        <Route path="/exercises/:Sname/:Sage" element={<ExericePage />} />
+        <Route path="/exercises/dogs" element={<Bird />} />
         <Route path="/*" element={<PageNotFound />} />
       </Routes>
-      <Footer></Footer>
+      {/* <Footer></Footer> */}
     </>
   );
 };

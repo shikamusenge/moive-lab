@@ -2,7 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import VideoCard from "../components/VideoCard";
-function SearchMovi() {
+function SearchForMovie() {
   const [movies, setMovies] = useState([]);
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -80,4 +80,4 @@ function SearchMovi() {
   );
 }
 
-export default SearchMovi;
+export default SearchForMovie;
