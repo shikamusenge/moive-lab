@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { FaBars, FaBarsStaggered } from "react-icons/fa6";
+import { FaBars, FaToggleOn } from "react-icons/fa6";
+import SearchBox from "./SearchBox";
 const Navbar = () => {
   const [isToggleOpen, setToggleOpen] = useState(false);
   const [query, setQuery] = useState();
@@ -8,11 +9,10 @@ const Navbar = () => {
 
   return (
     <div className="top-0 sticky z-20">
-      <nav className=" px-12  items-center grid bg-blue-950 h-[100px] overflow-hidden">
-        <div className=" flex justify-between text-white items-center h-fit max-h-[85px]">
+      <nav className=" px-12  items-center grid bg-blue-950 h-[100px] xl:justify-center">
+        <div className=" flex justify-between text-white items-center h-fit max-h-[85px] xl:w-[1250px] max-w-[1250px]">
           <div className="text-white text-2xl flex justify-center items-center md:font-extrabold">
-            <img src="/logo.png" alt="" className="h-[8vw]" />{" "}
-            <span className="text-[18px]">Movie Libirary</span>
+            <img src="/logo.png" alt="" className="h-[80px]" />{" "}
           </div>
           <div className="relaive">
             <div
@@ -35,7 +35,7 @@ const Navbar = () => {
                   className="rounded-md p-2 cursor-pointer md:hidden"
                   onClick={() => setToggleOpen(false)}
                 >
-                  <FaBarsStaggered />
+                  X
                 </span>
               </div>
               <Link
@@ -56,27 +56,7 @@ const Navbar = () => {
               >
                 Series
               </Link>{" "}
-              <form>
-                <input
-                  type="text"
-                  placeholder="Search......."
-                  className="md:w-[20vw] w-4/6 p-1 rounded-sm bg-white text-blue-950  font-bold 
-                   focus:outline-none
-                  "
-                  onChange={(event) => {
-                    setQuery(event.target.value);
-                  }}
-                />
-                <button
-                  className="link text-md md:px-12 m-2 p-1 bg-red-700 rounded-lg md:py-2"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    navigate(`/search/${query}`);
-                  }}
-                >
-                  Search
-                </button>
-              </form>
+              <SearchBox padding={1} key={"navBarSearch"} />
             </div>
           </div>
           <span

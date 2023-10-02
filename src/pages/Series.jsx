@@ -36,7 +36,6 @@ const Series = () => {
     };
     getData();
   };
-  console.log(selectedMovie);
   useEffect(() => {
     initApp();
   }, []);
@@ -47,23 +46,6 @@ const Series = () => {
           <img src="/loader_gif.gif" alt="Loading......." />
         </div>
       )}
-
-      <div
-        onClick={() => {
-          setAge(!adult);
-          setRecent([]);
-          initApp();
-        }}
-        className="bg-red-600 top-0 absolute rounded-full right-0 z-10 border p-3 h-[4rem] w-[4rem] cursor-pointer"
-      >
-        <FaUserAlt /> 18 +{" "}
-        <div className="relative">
-          <div className="absolute text-green-100 top-0 right-0 z-20 mt-[-3rem] mr-[-0.5rem] text-2xl m">
-            {adult ? <FaCheck /> : "X"}
-          </div>
-        </div>
-      </div>
-      <div></div>
       <div>
         <nav className=" bordered m-3 p-2 flex overflow-x-auto gap-3 bordered text-2xl h-fit bg-blue-200">
           {Array.from(Array(totalPages), (e, i) => {

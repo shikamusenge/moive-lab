@@ -8,7 +8,6 @@ const Trailler = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [data, setData] = useState(true);
   const [defaultVideo, setkey] = useState({ key: "" });
-  console.log(defaultVideo);
   const [traillors, setTraillors] = useState([]);
   useEffect(() => {
     setData(true);
@@ -35,7 +34,6 @@ const Trailler = () => {
       } catch (error) {
         setIsLoading(false);
         setData(false);
-        console.log(error);
       }
     };
     getData();

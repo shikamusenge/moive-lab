@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import VideoCard from "../components/VideoCard";
 import { Link } from "react-router-dom";
-import { FaUserAlt, FaCheck } from "react-icons/fa";
 import axios from "axios";
+import NetworkError from "../components/NetworkError";
 const Watches = () => {
   const [recent, setRecent] = useState([]);
   const [order, setOrderBy] = useState("now_playing");
+  const [networkError, setNetErro] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
@@ -36,7 +37,8 @@ const Watches = () => {
         setTotalPages(popularVideos.data.total_pages);
         setIsLoading(false);
       } catch (error) {
-        console.log(error);
+        setIsLoading(false);
+        setNetErro(true);
       }
     };
     getData();
@@ -52,40 +54,26 @@ const Watches = () => {
           <img src="/loader_gif.gif" alt="Loading......." />
         </div>
       )}
-
-      <div
-        onClick={() => {
-          setAge(!adult);
-          setRecent([]);
-          initApp();
-        }}
-        className="bg-red-600 top-0 absolute rounded-full right-0 z-10 border p-3 h-[4rem] w-[4rem] cursor-pointer"
-      >
-        <FaUserAlt /> 18 +{" "}
-        <div className="relative">
-          <div className="absolute text-green-100 top-0 right-0 z-20 mt-[-3rem] mr-[-0.5rem] text-2xl m">
-            {adult ? <FaCheck /> : "X"}
-          </div>
-        </div>
-      </div>
       <div>
-        #Recent videos
+        {networkError && <NetworkError />}
+        <div>{!isLoading && "#Recent videos"}</div>
         <div className="grid grid-cols-2 md:grid-cols-7 overflow-x-auto py-2 px-4">
-          {recent.map(
-            (video, index) =>
-              index < 7 && (
-                <Link
-                  to={`/trailor/${video.id}`}
-                  key={video.id}
-                  className="w-full min-w-fi justify-end flex"
-                >
-                  <VideoCard
-                    name={video.original_title}
-                    image={video.backdrop_path}
-                  />
-                </Link>
-              )
-          )}
+          {!isLoading &&
+            recent.map(
+              (video, index) =>
+                index < 7 && (
+                  <Link
+                    to={`/trailor/${video.id}`}
+                    key={video.id}
+                    className="w-full min-w-fi justify-end flex"
+                  >
+                    <VideoCard
+                      name={video.original_title}
+                      image={video.backdrop_path}
+                    />
+                  </Link>
+                )
+            )}
         </div>
       </div>
       <div>

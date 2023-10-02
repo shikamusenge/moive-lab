@@ -2,9 +2,10 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import VideoCard from "../components/VideoCard";
+import NetworkError from "../components/NetworkError";
 function SearchForMovie() {
   const [movies, setMovies] = useState([]);
-  const [error, setError] = useState(null);
+  const [networkError, setError] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
@@ -19,12 +20,16 @@ function SearchForMovie() {
           "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJkYzUxMjcyMGFmNmY0ZDUzNmY2YmY2MDEyNzBlNTRlMiIsInN1YiI6IjY1MTEyZDI5MjZkYWMxMDE0ZTIyYTgxMSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.8-09qdICI2J_-1b8VuFwZ8Vo1DuT2WSzMzI4MY2dUtk",
       },
     };
-    const response = await axios.get(url, options);
-    setMovies(response.data.results);
-    setTotalPages(response.data.total_pages);
-    setTotalResults(response.data.total_results);
-    setIsLoading(false);
-    console.log(response);
+    try {
+      const response = await axios.get(url, options);
+      setMovies(response.data.results);
+      setTotalPages(response.data.total_pages);
+      setTotalResults(response.data.total_results);
+      setIsLoading(false);
+    } catch (error) {
+      setIsLoading(false);
+      setError(true);
+    }
   };
   useEffect(() => {
     setIsLoading(true);
@@ -37,7 +42,8 @@ function SearchForMovie() {
           <img src="/loader_gif.gif" alt="Loading......." />
         </div>
       )}
-      <div>{totalResults} resuls is found</div>
+      <div>{!networkError && `${totalResults} results is found`}</div>
+      {networkError && <NetworkError />}
       {totalResults > 0 && (
         <>
           <div className="flex overflow-x-auto">
@@ -57,7 +63,7 @@ function SearchForMovie() {
               );
             })}
           </div>
-          <div className="grid grid-cols-7 px-8">
+          <div className="grid grid-cols-2 md:grid-cols-7 px-8">
             {movies.map(
               (video, index) =>
                 index < 7 && (
