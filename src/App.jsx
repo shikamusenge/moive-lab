@@ -11,6 +11,7 @@ import PageNotFound from "./pages/PageNotFound";
 import ExericePage from "./Exericse/ExericePage";
 import Bird from "./Exericse/Bird";
 import Series from "./pages/Series";
+import TasksPage from "./Exericse/tasks/TasksPage";
 const App = () => {
   return (
     <>
@@ -23,10 +24,10 @@ const App = () => {
         <Route path="/watch/:id/:mid" element={<WatchTrairor />} />
         <Route path="/search/:query" element={<SearForchMovie />} />
         <Route path="/exercises/:Sname/:Sage" element={<ExericePage />} />
+        <Route path="/tasks/:taskNo" element={<TasksPage />} />
         <Route path="/exercises/dogs" element={<Bird />} />
         <Route path="/*" element={<PageNotFound />} />
       </Routes>
-      {/* <Footer></Footer> */}
     </>
   );
 };
